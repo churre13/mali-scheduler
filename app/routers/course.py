@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.database import SessionLocal
+from datetime import datetime
+from app.database import SessionLocal, get_db
 from app import crud, schemas, models
 
 router = APIRouter(prefix="/courses", tags=["Courses"])
@@ -56,3 +57,29 @@ def update_course(course_id: int, updated_course: schemas.CourseCreate, db: Sess
     db.refresh(db_course)
     return db_course
 
+@router.post("/bulk-load/")
+def bulk_create_courses(data: list[schemas.CourseBulkCreate], db: Session = Depends(get_db)):
+    created = []
+    for entry in data:
+        if db.query(models.Course).filter_by(name=entry.name).first():
+            continue
+        try:
+            start_date = (
+                datetime.strptime(entry.start_date, "%Y-%m-%d").date()
+                if entry.start_date and entry.start_date.lower() != "próximamente"
+                else None
+            )
+        except ValueError:
+            start_date = None
+
+        new_course = models.Course(
+            name=entry.name,
+            duration_months=entry.duration_months,
+            start_date=start_date,
+            schedule=entry.schedule,
+            category=entry.category,
+        )
+        db.add(new_course)
+        created.append(entry.name)
+    db.commit()
+    return {"created_courses": created}

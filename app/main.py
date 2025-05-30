@@ -2,9 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routers import course
-
+from app.routers import session
+from app.routers import professor
 
 app = FastAPI(title="MALI Scheduler API")
+app.include_router(session.router)
+app.include_router(professor.router)
 
 Base.metadata.create_all(bind=engine)
 
