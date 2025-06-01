@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Calendar from "./Calendar";
+/*import Calendar from "./Calendar";*/
+/*import AcademicTable from "./AcademicTable";*/
+import CourseScheduleTable from "./CourseScheduleTable";
 import CourseForm from "./CourseForm";
 
 export default function Tabs() {
@@ -22,7 +24,7 @@ export default function Tabs() {
         </button>
       </div>
 
-      {activeTab === "calendar" && <Calendar />}
+      {activeTab === "calendar" && <CourseScheduleTable />}
       {activeTab === "form" && <CourseForm />}
     </div>
   );

@@ -5,6 +5,7 @@ from app import models, schemas
 from enum import Enum
 
 
+
 # ---------- MODULE ----------
 
 class ModuleBase(BaseModel):
@@ -103,3 +104,52 @@ class CourseBulkCreate(BaseModel):
     start_date: Optional[str] = None
     schedule: str = ""
     category: str
+
+
+# ---------- MODULES ----------
+
+class AcademicModuleView(BaseModel):
+    id: int
+    course_name: str
+    module_name: str
+    professor_name: Optional[str]
+    syllabus_status: Optional[str]
+    observations: Optional[str]
+    hours: Optional[int]
+
+    class Config:
+        from_attributes = True
+
+
+
+# ---------- COURSE SCHEDULE PREVIEW ----------
+class CourseSchedulePreview(BaseModel):
+    course_name: str
+    start_date: Optional[date]
+    schedule: Optional[str]
+    professors: List[str]
+    sessions: List[str]
+
+    class Config:
+        from_attributes = True
+
+
+# ---------- BULK ADDING MODULES ----------
+class BulkModuleEntry(BaseModel):
+    course_name: str
+    modules: List[ModuleCreate]
+
+
+
+ #---------- UPDATE A COURSE ----------
+
+class CourseUpdate(BaseModel):
+    name: Optional[str]
+    duration_months: Optional[int]
+    start_date: Optional[date]
+    schedule: Optional[str]
+    category: Optional[str]
+    modules: Optional[List[ModuleCreate]]
+
+    class Config:
+        from_attributes = True

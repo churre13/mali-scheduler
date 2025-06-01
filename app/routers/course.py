@@ -40,12 +40,12 @@ def delete_course(course_id: int, db: Session = Depends(get_db)):
     return db_course
 
 @router.put("/{course_id}", response_model=schemas.Course)
-def update_course(course_id: int, updated_course: schemas.CourseCreate, db: Session = Depends(get_db)):
+def update_course(course_id: int, updated_course: schemas.CourseUpdate, db: Session = Depends(get_db)):
     db_course = db.query(models.Course).filter(models.Course.id == course_id).first()
     if db_course is None:
         raise HTTPException(status_code=404, detail="Course not found")
 
-    updated_data = updated_course.dict()
+    updated_data = updated_course.dict(exclude_unset=True)
 
     if "modules" in updated_data:
         db_course.modules = [models.Module(**mod) for mod in updated_data.pop("modules")]
@@ -56,6 +56,7 @@ def update_course(course_id: int, updated_course: schemas.CourseCreate, db: Sess
     db.commit()
     db.refresh(db_course)
     return db_course
+
 
 @router.post("/bulk-load/")
 def bulk_create_courses(data: list[schemas.CourseBulkCreate], db: Session = Depends(get_db)):
