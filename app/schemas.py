@@ -1,13 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Any
 from datetime import date
 from app import models, schemas
 from enum import Enum
 
-
-
-# ---------- MODULE ----------
-
+# ---------- MODULES ----------
 class ModuleBase(BaseModel):
     name: str
     order: Optional[int] = None
@@ -24,6 +21,28 @@ class Module(ModuleBase):
     class Config:
         from_attributes = True
 
+# ---------- PROFESSORS ----------
+
+class ProfessorBase(BaseModel):
+    name: str
+
+class ProfessorCreate(ProfessorBase):
+    course_names: list[str]  # nombres de cursos
+
+class ProfessorRead(ProfessorBase):
+    id: int
+    courses: list[str]
+
+    @classmethod
+    def from_orm_with_courses(cls, professor):
+        return cls(
+            id=professor.id,
+            name=professor.name,
+            courses=[course.name for course in professor.courses],
+        )
+
+    class Config:
+        from_attributes = True  # Para Pydantic v2
 
 # ---------- COURSE ----------
 
@@ -34,17 +53,47 @@ class CourseBase(BaseModel):
     schedule: Optional[str]
     is_active: Optional[bool] = True
     category: Optional[str] = None
-
-
-
 class CourseCreate(CourseBase):
     modules: Optional[List[ModuleCreate]] = []
-
-
-
 class Course(CourseBase):
     id: int
     modules: List[Module] = []
+    professors: List[ProfessorRead] = []
+
+    class Config:
+        from_attributes = True
+
+class CourseUpdate(BaseModel):
+    name: Optional[str]
+    duration_months: Optional[int]
+    start_date: Optional[date]
+    schedule: Optional[str]
+    category: Optional[str]
+    modules: Optional[List[ModuleCreate]]
+    class Config:
+        from_attributes = True
+
+# ---------- BULK ----------
+
+class CourseBulkCreate(BaseModel):
+    name: str
+    duration_months: int = 1
+    start_date: Optional[str] = None
+    schedule: str = ""
+    category: str
+
+class BulkModuleEntry(BaseModel):
+    course_name: str
+    modules: List[ModuleCreate]
+
+# ---------- SCHEDULE PREVIEW ----------
+
+class CourseSchedulePreview(BaseModel):
+    course_name: str
+    start_date: Optional[date]
+    schedule: Optional[str]
+    professors: List[str]
+    sessions: List[str]
 
     class Config:
         from_attributes = True
@@ -80,33 +129,7 @@ class CourseModuleSessionRead(CourseModuleSessionBase):
     class Config:
         from_attributes = True
 
-# ---------- PROFESSORS ----------
-
-class ProfessorBase(BaseModel):
-    name: str
-
-class ProfessorCreate(ProfessorBase):
-    course_names: list[str]  # nombres de cursos
-
-class ProfessorRead(ProfessorBase):
-    id: int
-    courses: list[str]
-
-    class Config:
-        orm_mode = True
-
-
-# ---------- UPLOAD BULK COURSES ----------
-
-class CourseBulkCreate(BaseModel):
-    name: str
-    duration_months: int = 1
-    start_date: Optional[str] = None
-    schedule: str = ""
-    category: str
-
-
-# ---------- MODULES ----------
+# ---------- MODULE TABLE VIEW ----------
 
 class AcademicModuleView(BaseModel):
     id: int
@@ -116,40 +139,6 @@ class AcademicModuleView(BaseModel):
     syllabus_status: Optional[str]
     observations: Optional[str]
     hours: Optional[int]
-
-    class Config:
-        from_attributes = True
-
-
-
-# ---------- COURSE SCHEDULE PREVIEW ----------
-class CourseSchedulePreview(BaseModel):
-    course_name: str
-    start_date: Optional[date]
-    schedule: Optional[str]
-    professors: List[str]
-    sessions: List[str]
-
-    class Config:
-        from_attributes = True
-
-
-# ---------- BULK ADDING MODULES ----------
-class BulkModuleEntry(BaseModel):
-    course_name: str
-    modules: List[ModuleCreate]
-
-
-
- #---------- UPDATE A COURSE ----------
-
-class CourseUpdate(BaseModel):
-    name: Optional[str]
-    duration_months: Optional[int]
-    start_date: Optional[date]
-    schedule: Optional[str]
-    category: Optional[str]
-    modules: Optional[List[ModuleCreate]]
 
     class Config:
         from_attributes = True

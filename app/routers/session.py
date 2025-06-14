@@ -40,3 +40,6 @@ def delete_session(session_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Session deleted successfully"}
 
+@router.get("/", response_model=list[schemas.CourseModuleSessionRead])
+def get_all_sessions(db: Session = Depends(get_db)):
+    return db.query(models.CourseModuleSession).all()

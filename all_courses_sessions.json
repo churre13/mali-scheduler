@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Inteligencia Artificial para Creativos",
+    "duration_months": 4,
+    "start_date": "2025-06-14",
+    "schedule": "Sábados 9:00 am - 1:00 pm",
+    "category": "IA y Social Media"
+  },
+  {
+    "name": "Diseño Gráfico Digital",
+    "duration_months": 5,
+    "start_date": "2025-05-28",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Artes Gráficas e Ilustración"
+  },
+  {
+    "name": "Gráfica Digital",
+    "duration_months": 5,
+    "start_date": "2025-05-28",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Artes Gráficas e Ilustración"
+  },
+  {
+    "name": "Ilustración Digital",
+    "duration_months": 5,
+    "start_date": "2025-05-28",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Artes Gráficas e Ilustración"
+  },
+  {
+    "name": "Diseño de Interiores para Arquitectos",
+    "duration_months": 5,
+    "start_date": "2025-05-29",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Arquitectura y Diseño de Interiores"
+  },
+  {
+    "name": "Diseño de Interiores para Espacios Residenciales",
+    "duration_months": 5,
+    "start_date": "2025-05-29",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Arquitectura y Diseño de Interiores"
+  },
+  {
+    "name": "Producción Musical",
+    "duration_months": 5,
+    "start_date": "2025-05-28",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Música y Negocios"
+  },
+  {
+    "name": "Producción y Negocios Musicales",
+    "duration_months": 10,
+    "start_date": "2025-05-26",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Música y Negocios"
+  },
+  {
+    "name": "Music Business",
+    "duration_months": 5,
+    "start_date": "2025-06-28",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Música y Negocios"
+  },
+  {
+    "name": "Community Management",
+    "duration_months": 5,
+    "start_date": "2025-06-26",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "IA y Social Media"
+  },
+  {
+    "name": "Gestión de Redes Sociales",
+    "duration_months": 5,
+    "start_date": "2025-06-26",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "IA y Social Media"
+  },
+  {
+    "name": "Fotografía Publicitaria",
+    "duration_months": 5,
+    "start_date": "2025-06-26",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Comunicación Audiovisual y Fotografía"
+  },
+  {
+    "name": "Fotografía Básica",
+    "duration_months": 5,
+    "start_date": "2025-06-26",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Comunicación Audiovisual y Fotografía"
+  },
+  {
+    "name": "Fotografía Artística para Exposiciones",
+    "duration_months": 5,
+    "start_date": "2025-06-26",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Comunicación Audiovisual y Fotografía"
+  },
+  {
+    "name": "Producción Teatral y Dirección de Artes Escénicas",
+    "duration_months": 6,
+    "start_date": "2025-06-25",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Artes Escénicas y Eventos"
+  },
+  {
+    "name": "Paisajismo y Diseño de Jardines",
+    "duration_months": 6,
+    "start_date": "2025-06-25",
+    "schedule": "Lunes y Miércoles 8:00 pm - 10:00 pm",
+    "category": "Arquitectura y Diseño de Interiores"
+  },
+  {
+    "name": "Diseño de Eventos y Experiencias",
+    "duration_months": 6,
+    "start_date": "2025-06-25",
+    "schedule": "Martes y Jueves 8:00 pm - 10:00 pm",
+    "category": "Artes Escénicas y Eventos"
+  },
+  {
+    "name": "Creación Literaria: Relato Breve y Cuento",
+    "duration_months": 6,
+    "start_date": "2025-05-31",
+    "schedule": "Sábados 9:00 am - 1:00 pm",
+    "category": "Literatura y Escritura Creativa"
+  },
+  {
+    "name": "Herramientas Audiovisual",
+    "duration_months": 5,
+    "start_date": "Próximamente",
+    "schedule": "Próximamente",
+    "category": "Comunicación Audiovisual y Fotografía"
+  },
+  {
+    "name": "Producción Audiovisual",
+    "duration_months": 3,
+    "start_date": "Próximamente",
+    "schedule": "Próximamente",
+    "category": "Comunicación Audiovisual y Fotografía"
+  },
+  {
+    "name": "Diseño UX / UI",
+    "duration_months": 3,
+    "start_date": "Próximamente",
+    "schedule": "Próximamente",
+    "category": "IA y Social Media"
+  },
+  {
+    "name": "Diseño y Gestión de Modas",
+    "duration_months": 5,
+    "start_date": "Próximamente",
+    "schedule": "Próximamente",
+    "category": "Diseño de Moda"
+  }
+]

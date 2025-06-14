@@ -40,6 +40,7 @@ def get_schedule_preview(db: Session = Depends(get_db)):
     previews = []
 
     for course in courses:
+        print(f"Curso: {course.name} | Fecha inicio: {course.start_date} | Horario: {course.schedule} | Duración: {course.duration_months}")
         if not course.start_date or not course.schedule:
             continue
 
@@ -61,3 +62,6 @@ def get_schedule_preview(db: Session = Depends(get_db)):
         ))
 
     return previews
+
+
+    print(course.name, course.start_date, course.schedule, course.duration_months)

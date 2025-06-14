@@ -1,0 +1,222 @@
+[
+  {
+    "course_name": "Diseño Gráfico Digital",
+    "modules": [
+      { "name": "Illustrator / Photoshop + IA", "order": 1 },
+      { "name": "Fundamentos del diseño", "order": 2 },
+      { "name": "Retoque Fotográfico con Lightroom", "order": 3 },
+      { "name": "Indesign", "order": 4 },
+      { "name": "Tipografía", "order": 5 },
+      { "name": "Marketing Digital", "order": 6 },
+      { "name": "Imagen Corporativa", "order": 7 },
+      { "name": "UX/UI", "order": 8 },
+      { "name": "Taller de integración final", "order": 9 }
+    ]
+  },
+  {
+    "course_name": "Gráfica Digital",
+    "modules": [
+      { "name": "Illustrator / Photoshop + IA", "order": 1 },
+      { "name": "Fundamentos del diseño", "order": 2 },
+      { "name": "Retoque Fotográfico con Lightroom", "order": 3 },
+      { "name": "Indesign", "order": 4 },
+      { "name": "Tipografía", "order": 5 }
+    ]
+  },
+  {
+    "course_name": "Creación Literaria: Relato Breve y Cuento",
+    "modules": [
+      { "name": "Fundamentos de la Ficción I: Personajes, conflicto y escenario", "order": 1 },
+      { "name": "Fundamentos de la Ficción II: Tiempo, trama y tema", "order": 2 },
+      { "name": "Fundamentos de la Ficción III: Estilo, simbolismo y subtexto", "order": 3 },
+      { "name": "¿Quién cuenta la historia?: Tipos de Narradores", "order": 4 },
+      { "name": "La creación de la trama y el papel de las emociones", "order": 5 },
+      { "name": "La creación de un mundo: Búsqueda, selección e interpretación", "order": 6 },
+      { "name": "La Construcción del Personaje Literario", "order": 7 },
+      { "name": "Taller integrador de Relato Breve y Cuento", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Diseño de Interiores para Arquitectos",
+    "modules": [
+      { "name": "Fundamentos del Interiorismo", "order": 1 },
+      { "name": "Iluminación & Color", "order": 2 },
+      { "name": "Materiales, acabados y diseño sostenible", "order": 3 },
+      { "name": "AutoCAD", "order": 4 },
+      { "name": "Sketchup + Layout", "order": 5 },
+      { "name": "Modelos 3D en Lumion + Postproducción", "order": 6 },
+      { "name": "Costos y Presupuestos", "order": 7 },
+      { "name": "Portafolio de Proyectos + Expo MALI", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Diseño de Interiores para Espacios Residenciales",
+    "modules": [
+      { "name": "Fundamentos de espacio y color", "order": 1 },
+      { "name": "Materiales y acabados", "order": 2 },
+      { "name": "Planos 2D en Rayon y Mattoboard", "order": 3 },
+      { "name": "Diseño de instalaciones & Iluminación", "order": 4 },
+      { "name": "Sketchup + Layout", "order": 5 },
+      { "name": "Decostyling", "order": 6 },
+      { "name": "Costos y Presupuestos", "order": 7 },
+      { "name": "Portafolio de Proyectos + EXPO MALI", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Inteligencia Artificial para Creativos",
+    "modules": [
+      { "name": "Fundamentos de IA & su aplicación", "order": 1 },
+      { "name": "IA en la creación de contenidos", "order": 2 },
+      { "name": "Herramientas de IA para diseño", "order": 3 },
+      { "name": "IA en producción y edición", "order": 4 },
+      { "name": "Integración avanzada & Proyecto Final", "order": 5 }
+    ]
+  },
+  {
+    "course_name": "Producción y Negocios Musicales",
+    "modules": [
+      { "name": "Introducción a la producción musical", "order": 1 },
+      { "name": "Teoría musical & composición", "order": 2 },
+      { "name": "Grabación & edición de audio", "order": 3 },
+      { "name": "Mezcla & Masterización", "order": 4 },
+      { "name": "Producción musical avanzada", "order": 5 },
+      { "name": "Proyecto musical final", "order": 6 },
+      { "name": "Fundamentos del music business", "order": 7 },
+      { "name": "Marketing digital y promoción musical", "order": 8 },
+      { "name": "Desarrollo de Negocios de la música", "order": 9 },
+      { "name": "Nuevas plataformas musicales y tendencias", "order": 10 },
+      { "name": "Management y producción", "order": 11 },
+      { "name": "Derecho del Entretenimiento y Reputación artística", "order": 12 },
+      { "name": "Proyecto final: Estrategia de Lanzamiento Musical", "order": 13 }
+    ]
+  },
+  {
+    "course_name": "Producción Musical",
+    "modules": [
+      { "name": "Introducción a la producción musical", "order": 1 },
+      { "name": "Teoría musical & composición", "order": 2 },
+      { "name": "Grabación & edición de audio", "order": 3 },
+      { "name": "Mezcla & Masterización", "order": 4 },
+      { "name": "Producción musical avanzada", "order": 5 },
+      { "name": "Proyecto musical final", "order": 6 }
+    ]
+  },
+  {
+    "course_name": "Community Management",
+    "modules": [
+      { "name": "Community Management & Social Media", "order": 1 },
+      { "name": "Marketing de Contenidos, Storytelling & ChatGPT", "order": 2 },
+      { "name": "Facebook, Instagram & TikTok para empresas", "order": 3 },
+      { "name": "Meta ads & Tik tok ads", "order": 4 },
+      { "name": "Linkedin, Whatsapp & Google Business", "order": 5 },
+      { "name": "E-mail marketing & CRM para Community Manag.", "order": 6 },
+      { "name": "SEO Y SEM para social media", "order": 7 },
+      { "name": "Analítica y Proyecto Final", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Gestión de Redes Sociales",
+    "modules": [
+      { "name": "Community Management & Social Media", "order": 1 },
+      { "name": "Marketing de Contenidos, Storytelling & ChatGPT", "order": 2 },
+      { "name": "Facebook, Instagram & TikTok para empresas", "order": 3 },
+      { "name": "Meta ads & Tik tok ads", "order": 4 }
+    ]
+  },
+  {
+    "course_name": "Fotografía Artística para Exposiciones",
+    "modules": [
+      { "name": "Fundamentos para la creación fotográfica", "order": 1 },
+      { "name": "Composición y narrativa visual", "order": 2 },
+      { "name": "Iluminación creativa", "order": 3 },
+      { "name": "Postproducción digital", "order": 4 },
+      { "name": "Presencia digital y portafolio", "order": 5 },
+      { "name": "Exposición y presentación", "order": 6 }
+    ]
+  },
+  {
+    "course_name": "Fotografía Publicitaria",
+    "modules": [
+      { "name": "Fundamentos y manejo de la cámara fotográfica", "order": 1 },
+      { "name": "Iluminación fotográfica", "order": 2 },
+      { "name": "Revelado y retoque fotográfico", "order": 3 },
+      { "name": "Fotografía para redes sociales e imagen corporativa", "order": 4 },
+      { "name": "Portafolio final", "order": 5 }
+    ]
+  },
+  {
+    "course_name": "Fotografía Básica",
+    "modules": [
+      { "name": "Fundamentos y manejo de la cámara fotográfica", "order": 1 },
+      { "name": "Iluminación fotográfica", "order": 2 },
+      { "name": "Revelado y retoque fotográfico", "order": 3 }
+    ]
+  },
+  {
+    "course_name": "Music Business",
+    "modules": [
+      { "name": "Fundamentos del Music Business", "order": 1 },
+      { "name": "Marketing digital & promoción musical", "order": 2 },
+      { "name": "Desarrollo de Negocios de la música", "order": 3 },
+      { "name": "Nuevas plataformas musicales y tendencias", "order": 4 },
+      { "name": "Management & producción", "order": 5 },
+      { "name": "Derecho del Entretenimiento y reputación artística", "order": 6 },
+      { "name": "Proyecto Final: Estrategia de lanzamiento musical", "order": 7 }
+    ]
+  },
+  {
+    "course_name": "Ilustración digital",
+    "modules": [
+      { "name": "Arte digital", "order": 1 },
+      { "name": "Dibujo básico aplicado a la figura humana", "order": 2 },
+      { "name": "Ilustración editorial", "order": 3 },
+      { "name": "Cómics y novelas gráficas", "order": 4 },
+      { "name": "Ilustración con Adobe Illustrator", "order": 5 },
+      { "name": "Comunicación audiovisual con Adobe Photoshop", "order": 6 },
+      { "name": "Ilustraciones publicitarias", "order": 7 },
+      { "name": "Diseño de ambientación y diseño de estampados", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Diseño de Eventos y Experiencias",
+    "modules": [
+      { "name": "Conceptualización y Narrativa de Eventos", "order": 1 },
+      { "name": "Diseño de Experiencias", "order": 2 },
+      { "name": "Planificación de Eventos", "order": 3 },
+      { "name": "Producción de Eventos", "order": 4 },
+      { "name": "Diseño Estrategias de Marketing y Comunicación para Eventos", "order": 5 },
+      { "name": "Gestión económica, financiera y legal para eventos", "order": 6 },
+      { "name": "Social events - Taller de Eventos Sociales y Corporativos", "order": 7 },
+      { "name": "Cultural Events - Taller de Muesística y Exposiciones", "order": 8 },
+      { "name": "Music Events - Taller de Eventos Musicales y Entretenimiento", "order": 9 },
+      { "name": "Sports Events - Taller de Eventos Deportivos y eSports", "order": 10 },
+      { "name": "Fashion Events - Taller de Eventos de Modas", "order": 11 }
+    ]
+  },
+  {
+    "course_name": "Paisajismo y Diseño de Jardines",
+    "modules": [
+      { "name": "Las plantas y su entorno: Suelo, Agua, Clima", "order": 1 },
+      { "name": "Introducción al paisajismo y tipologías de plantas", "order": 2 },
+      { "name": "Plantas ornamentales", "order": 3 },
+      { "name": "Plantas de interior y decoración con flores", "order": 4 },
+      { "name": "Estilos decorativos y tipologías de jardines", "order": 5 },
+      { "name": "Técnicas de implantación y mantenimiento de jardines", "order": 6 },
+      { "name": "Herramientas digitales en el diseño de paisajes", "order": 7 },
+      { "name": "Proyecto Integral de Diseño Paisajístico", "order": 8 }
+    ]
+  },
+  {
+    "course_name": "Producción Teatral y Dirección de Artes Escénicas",
+    "modules": [
+      { "name": "Fundamentos para el análisis de textos dramáticos", "order": 1 },
+      { "name": "Análisis de poéticas escénicas contemporáneas", "order": 2 },
+      { "name": "Dirección de actores", "order": 3 },
+      { "name": "Diseño escénico", "order": 4 },
+      { "name": "Producción teatral 1: diseño de producción", "order": 5 },
+      { "name": "Producción teatral 2: financiamiento, ejecución y circulación", "order": 6 },
+      { "name": "Marketing para proyectos escénicos", "order": 7 },
+      { "name": "Proyecto integrador de producción y dirección escénica", "order": 8 }
+    ]
+  }
+]

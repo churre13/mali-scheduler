@@ -61,8 +61,46 @@ def create_course(db: Session, course: schemas.CourseCreate):
 
 
 def get_courses(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Course).offset(skip).limit(limit).all()
+    courses = db.query(models.Course).offset(skip).limit(limit).all()
+    print("Cargando cursos desde DB:", courses)
+    return courses
+
 
 
 def get_course(db: Session, course_id: int):
     return db.query(models.Course).filter(models.Course.id == course_id).first()
+
+def generar_sesiones_para_curso(db: Session, course: models.Course):
+    if not course.start_date or not course.schedule:
+        return
+
+    dias_semana = {
+        "Lunes": 0,
+        "Martes": 1,
+        "Miércoles": 2,
+        "Jueves": 3,
+        "Viernes": 4,
+        "Sábado": 5,
+        "Domingo": 6,
+    }
+
+    dias = [dias_semana[d] for d in dias_semana if d in course.schedule]
+    fecha_actual = course.start_date
+    fecha_fin = fecha_actual + relativedelta(months=course.duration_months)
+    session_number = 1
+
+    for module in course.modules:
+        fecha_actual = course.start_date  # Reiniciamos para cada módulo
+        while fecha_actual <= fecha_fin:
+            if fecha_actual.weekday() in dias and fecha_actual not in peru_holidays:
+                session = models.CourseModuleSession(
+                    session_number=session_number,
+                    date=fecha_actual,
+                    status="Programada",
+                    module_id=module.id
+                )
+                db.add(session)
+                session_number += 1
+            fecha_actual += timedelta(days=1)
+
+    db.commit()

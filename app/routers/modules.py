@@ -21,3 +21,7 @@ def bulk_load_modules(data: list[schemas.BulkModuleEntry], db: Session = Depends
                 created.append(f"{course.name} - {mod_data.name}")
     db.commit()
     return {"created_modules": created}
+
+@router.get("/", response_model=list[schemas.Module])
+def read_modules(db: Session = Depends(get_db)):
+    return db.query(models.Module).all()

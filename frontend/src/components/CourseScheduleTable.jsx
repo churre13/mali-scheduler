@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import EditCourseDrawer from "./EditCourseDrawer"; // 👈 Asegúrate que esté en la misma carpeta
 
 export default function CourseScheduleTable() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const fetchCourses = () => {
+    setLoading(true);
+    axios.get("http://127.0.0.1:8000/courses/")
+      .then((res) => setCourses(res.data))
+      .catch((err) => console.error("Error cargando cursos:", err))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/courses/schedule-preview")
-      .then((res) => setCourses(res.data))
-      .finally(() => setLoading(false));
+    fetchCourses();
   }, []);
 
   return (
@@ -24,23 +32,38 @@ export default function CourseScheduleTable() {
               <th className="border p-2">Profesores</th>
               <th className="border p-2">Inicio</th>
               <th className="border p-2">Horario</th>
-              <th className="border p-2">Sesiones programadas</th>
+              <th className="border p-2">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {courses.map((c, idx) => (
               <tr key={idx}>
-                <td className="border p-2">{c.course_name}</td>
-                <td className="border p-2">{c.professors.join(", ")}</td>
+                <td className="border p-2">{c.name}</td>
+                <td className="border p-2">{c.professors?.map(p => p.name).join(", ")}</td>
                 <td className="border p-2">{c.start_date || "—"}</td>
                 <td className="border p-2">{c.schedule}</td>
                 <td className="border p-2">
-                  {c.sessions.slice(0, 5).join(", ")}{c.sessions.length > 5 ? "..." : ""}
+                  <button
+                    className="text-blue-600 underline"
+                    onClick={() => setSelectedCourse(c)}
+                  >
+                    ✏️ Editar
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+      {selectedCourse && (
+        <EditCourseDrawer
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+          onUpdated={() => {
+            fetchCourses();
+            setSelectedCourse(null);
+          }}
+        />
       )}
     </div>
   );

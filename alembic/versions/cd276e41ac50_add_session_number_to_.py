@@ -1,10 +1,10 @@
-"""Add CourseModuleSession table
+"""Add session_number to CourseModuleSession
 
-Revision ID: 6df59101a620
-Revises: 
-Create Date: 2025-05-31 01:46:08.635809
+Revision ID: cd276e41ac50
+Revises: 6df59101a620
+Create Date: 2025-06-01 03:31:19.612074
+
 """
-
 from typing import Sequence, Union
 
 from alembic import op
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '6df59101a620'
-down_revision: Union[str, None] = None
+revision: str = 'cd276e41ac50'
+down_revision: Union[str, None] = '6df59101a620'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

@@ -49,7 +49,10 @@ class Module(Base):
     name = Column(String, nullable=False)
     order = Column(Integer, nullable=True)
     course_id = Column(Integer, ForeignKey("courses.id"))
-
+    syllabus_status = Column(String, nullable=True)
+    observations = Column(String, nullable=True)
+    professor_id = Column(Integer, ForeignKey("professors.id"), nullable=True)
+    hours = Column(Integer, default=2)
     course = relationship("Course", back_populates="modules")
     sessions = relationship("CourseModuleSession", back_populates="module")
 
@@ -62,6 +65,7 @@ class CourseModuleSession(Base):
     status = Column(Enum(SessionStatusEnum), default=SessionStatusEnum.ACTIVE)
     extra_note = Column(String, nullable=True)
     module_id = Column(Integer, ForeignKey("modules.id"))
-
+    hours = Column(Integer, nullable=True)
     module = relationship("Module", back_populates="sessions")
+
 
