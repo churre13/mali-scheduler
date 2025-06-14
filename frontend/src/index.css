@@ -2,73 +2,237 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Add this to your src/index.css file after the Tailwind directives */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color:   #242424;
+/* FullCalendar Custom Styles */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Event styling */
+.fc-event {
+  margin-bottom: 1px !important;
+  font-size: 10px !important;
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.fc-event:hover {
+  opacity: 0.9 !important;
+  transform: scale(1.02) !important;
+  transition: all 0.2s ease !important;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Day grid event styling */
+.fc-daygrid-event {
+  white-space: normal !important;
+  height: auto !important;
+  min-height: 20px !important;
+  margin-bottom: 1px !important;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.fc-daygrid-event-harness {
+  margin-bottom: 1px !important;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Day cell styling */
+.fc-daygrid-day {
+  vertical-align: top !important;
+  min-height: 120px !important;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 120px !important;
+  padding: 2px !important;
+}
+
+.fc-daygrid-day-events {
+  margin-bottom: 0 !important;
+  overflow: visible !important;
+}
+
+.fc-daygrid-day-top {
+  flex-direction: row !important;
+  justify-content: center !important;
+  padding: 4px !important;
+}
+
+/* Event content styling */
+.fc-event-title {
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.fc-event-main-frame {
+  overflow: hidden !important;
+}
+
+.fc-event-title-container {
+  padding: 2px 4px !important;
+}
+
+/* More events link */
+.fc-more-link {
+  font-size: 10px !important;
+  color: #666 !important;
+  margin-top: 2px !important;
+  padding: 2px 4px !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 2px !important;
+}
+
+.fc-more-link:hover {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Holiday events */
+.holiday-event {
+  opacity: 0.4 !important;
+  background-color: rgba(254, 202, 202, 0.6) !important;
+  border-color: rgba(248, 113, 113, 0.6) !important;
+}
+
+/* Calendar header */
+.fc-toolbar {
+  margin-bottom: 1rem !important;
+}
+
+.fc-toolbar-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: #1f2937 !important;
+}
+
+.fc-button {
+  background-color: #f3f4f6 !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 0.375rem !important;
+}
+
+.fc-button:hover {
+  background-color: #e5e7eb !important;
+  border-color: #9ca3af !important;
+}
+
+.fc-button-primary {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.fc-button-primary:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.fc-button:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Day numbers */
+.fc-daygrid-day-number {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  padding: 4px !important;
+}
+
+/* Today highlighting */
+.fc-day-today {
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Weekend styling */
+.fc-day-sat,
+.fc-day-sun {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Month view specific */
+.fc-dayGridMonth-view .fc-daygrid-day {
+  min-height: 100px !important;
+}
+
+/* Week view specific */
+.fc-timeGridWeek-view .fc-timegrid-slot {
+  height: 40px !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fc-event {
+    font-size: 9px !important;
+    padding: 1px 2px !important;
   }
-  a:hover {
-    color: #747bff;
+  
+  .fc-daygrid-day {
+    min-height: 80px !important;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .fc-toolbar {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .fc-toolbar-chunk {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem !important;
   }
 }
-*/
+
+/* Custom animations */
+@keyframes eventAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fc-event {
+  animation: eventAppear 0.3s ease-out !important;
+}
+
+/* Scrollbar styling for popover */
+.fc-popover {
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+.fc-popover::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.fc-popover::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+.fc-popover::-webkit-scrollbar-thumb {
+  background: #c1c1c1 !important;
+  border-radius: 3px !important;
+}
+
+.fc-popover::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8 !important;
+}

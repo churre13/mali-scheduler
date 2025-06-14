@@ -18,7 +18,6 @@ export default function AcademicTable() {
       prev.map((m) => (m.id === id ? { ...m, [field]: value } : m))
     );
   };
-
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Plan Académico por Módulo</h2>

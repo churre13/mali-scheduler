@@ -1,10 +1,10 @@
 import { useState } from "react";
-
 import CourseScheduleTable from "./CourseScheduleTable";
 import CourseForm from "./CourseForm";
+import Calendar from "./Calendar";
 
 export default function Tabs() {
-  const [activeTab, setActiveTab] = useState("calendar");
+  const [activeTab, setActiveTab] = useState("table");
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleEditCourse = (course) => {
@@ -14,40 +14,55 @@ export default function Tabs() {
 
   const handleFormSuccess = () => {
     setSelectedCourse(null);
-    setActiveTab("calendar");
+    setActiveTab("table");
   };
 
+  const tabs = [
+    { id: "table", label: "Ver calendario", icon: "📋" },
+    { id: "calendar", label: "Vista calendario", icon: "📅" },
+    { id: "form", label: "Crear curso", icon: "➕" }
+  ];
+
   return (
-    <div className="max-w-6xl mx-auto py-6 px-4">
-      <div className="flex gap-4 mb-6 border-b">
-        <button
-          onClick={() => {
-            setActiveTab("calendar");
-            setSelectedCourse(null);
-          }}
-          className={`pb-2 px-4 border-b-2 transition-all ${
-  activeTab === "calendar"
-    ? "border-mali-pink text-mali-pink font-bold"
-    : "border-transparent text-gray-500 hover:text-mali-pink"
-}`}
-        >
-          Ver calendario
-        </button>
-        <button
-          onClick={() => {
-            setActiveTab("form");
-            setSelectedCourse(null);
-          }}
-          className={`pb-2 border-b-2 ${activeTab === "form" ? "border-blue-600 text-blue-600 font-bold" : "border-transparent text-gray-500"}`}
-        >
-          Crear curso
-        </button>
+    <div className="max-w-7xl mx-auto py-6 px-4">
+      {/* Tab Navigation */}
+      <div className="flex gap-1 mb-6 border-b border-gray-200 bg-white rounded-t-lg">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => {
+              setActiveTab(tab.id);
+              if (tab.id !== "form") setSelectedCourse(null);
+            }}
+            className={`flex items-center gap-2 px-6 py-3 border-b-2 transition-all font-medium ${
+              activeTab === tab.id
+                ? "border-mali-pink text-mali-pink bg-pink-50"
+                : "border-transparent text-gray-500 hover:text-mali-pink hover:bg-gray-50"
+            }`}
+          >
+            <span className="text-lg">{tab.icon}</span>
+            {tab.label}
+          </button>
+        ))}
       </div>
 
-      {activeTab === "calendar" && <CourseScheduleTable onEdit={handleEditCourse} />}
-      {activeTab === "form" && (
-        <CourseForm selectedCourse={selectedCourse} onSuccess={handleFormSuccess} />
-      )}
+      {/* Tab Content */}
+      <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm min-h-[600px]">
+        {activeTab === "table" && (
+          <CourseScheduleTable onEdit={handleEditCourse} />
+        )}
+        
+        {activeTab === "calendar" && (
+          <Calendar />
+        )}
+        
+        {activeTab === "form" && (
+          <CourseForm 
+            selectedCourse={selectedCourse} 
+            onSuccess={handleFormSuccess} 
+          />
+        )}
+      </div>
     </div>
   );
 }
