@@ -4,6 +4,7 @@ from app.database import Base
 from typing import Optional
 from enum import Enum as PyEnum
 from app.schemas import SessionStatusEnum
+from datetime import datetime
 
 
 class SessionStatusEnum(PyEnum):
@@ -23,9 +24,24 @@ class Professor(Base):
     __tablename__ = "professors"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
+    name = Column(String, nullable=False)  # Keep for backward compatibility
+    first_name = Column(String, nullable=True)  # New field
+    last_name = Column(String, nullable=True)   # New field
+    email = Column(String, unique=True, nullable=True)
+    phone = Column(String, nullable=True)
+    bio = Column(String, nullable=True)  # Short biography
+    specialties = Column(String, nullable=True)  # Comma-separated specialties
+    created_at = Column(Date, default=datetime.utcnow)
+    is_active = Column(Boolean, default=True)
 
     courses = relationship("Course", secondary=professor_courses, back_populates="professors")
+
+    @property
+    def full_name(self):
+        """Returns the full name if first_name and last_name exist, otherwise returns name"""
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.name
 
 class Course(Base):
     __tablename__ = "courses"

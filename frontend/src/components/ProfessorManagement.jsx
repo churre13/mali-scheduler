@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProfessorDetailsModal from "./ProfessorDetailsModal"; // Add this import
 
 export default function ProfessorManagement() {
   const [professors, setProfessors] = useState([]);
@@ -20,6 +21,10 @@ export default function ProfessorManagement() {
   const [adding, setAdding] = useState(false);
   const [addError, setAddError] = useState("");
 
+  // Professor Details state
+  const [showProfessorDetails, setShowProfessorDetails] = useState(false);
+  const [selectedProfessorId, setSelectedProfessorId] = useState(null);
+
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -39,6 +44,18 @@ export default function ProfessorManagement() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // View professor details
+  const handleViewProfessor = (professorId) => {
+    setSelectedProfessorId(professorId);
+    setShowProfessorDetails(true);
+  };
+
+  const handleCloseProfessorDetails = () => {
+    setShowProfessorDetails(false);
+    setSelectedProfessorId(null);
+    fetchData(); // Refresh data in case professor was updated
+  };
 
   // Selection management
   const toggleProfessorSelection = (professorId) => {
@@ -205,6 +222,7 @@ export default function ProfessorManagement() {
                 />
               </th>
               <th className="text-left p-4 font-semibold text-gray-700 border-b">Profesor</th>
+              <th className="text-left p-4 font-semibold text-gray-700 border-b">Información</th>
               <th className="text-left p-4 font-semibold text-gray-700 border-b">Cursos Asignados</th>
               <th className="text-left p-4 font-semibold text-gray-700 border-b">Total Cursos</th>
               <th className="text-left p-4 font-semibold text-gray-700 border-b">Acciones</th>
@@ -224,14 +242,35 @@ export default function ProfessorManagement() {
                 </td>
 
                 <td className="p-4 border-b">
-                  <div className="font-medium text-gray-900">{professor.name}</div>
+                  <div className="font-medium text-gray-900">
+                    {professor.first_name && professor.last_name 
+                      ? `${professor.first_name} ${professor.last_name}` 
+                      : professor.name}
+                  </div>
                   <div className="text-sm text-gray-500">ID: {professor.id}</div>
+                </td>
+
+                <td className="p-4 border-b">
+                  <div className="text-sm text-gray-600">
+                    {professor.email && (
+                      <div className="flex items-center gap-1">
+                        📧 {professor.email}
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                        professor.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {professor.is_active ? 'Activo' : 'Inactivo'}
+                      </span>
+                    </div>
+                  </div>
                 </td>
 
                 <td className="p-4 border-b">
                   {professor.courses && professor.courses.length > 0 ? (
                     <div className="flex flex-wrap gap-1">
-                      {professor.courses.slice(0, 3).map((courseName, idx) => (
+                      {professor.courses.slice(0, 2).map((courseName, idx) => (
                         <span
                           key={idx}
                           className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
@@ -239,9 +278,9 @@ export default function ProfessorManagement() {
                           {courseName}
                         </span>
                       ))}
-                      {professor.courses.length > 3 && (
+                      {professor.courses.length > 2 && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                          +{professor.courses.length - 3} más
+                          +{professor.courses.length - 2} más
                         </span>
                       )}
                     </div>
@@ -259,10 +298,7 @@ export default function ProfessorManagement() {
                 <td className="p-4 border-b">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => {
-                        // You can add view/edit functionality here
-                        console.log('View professor details:', professor);
-                      }}
+                      onClick={() => handleViewProfessor(professor.id)}
                       className="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors"
                     >
                       👁️ Ver
@@ -339,6 +375,14 @@ export default function ProfessorManagement() {
         />
       )}
 
+      {/* Professor Details Modal */}
+      {showProfessorDetails && selectedProfessorId && (
+        <ProfessorDetailsModal
+          professorId={selectedProfessorId}
+          onClose={handleCloseProfessorDetails}
+        />
+      )}
+
       {/* Delete Confirmation Modal */}
       {showDeleteConfirmation && deleteTarget && (
         <ProfessorDeleteConfirmationModal
@@ -355,7 +399,7 @@ export default function ProfessorManagement() {
   );
 }
 
-// Add Professor Modal Component
+// Add Professor Modal Component (keeping the same as before)
 function AddProfessorModal({ newProfessor, courses, onNameChange, onCourseToggle, onSubmit, onCancel, adding, error }) {
   return (
     <>

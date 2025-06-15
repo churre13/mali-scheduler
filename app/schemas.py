@@ -1,8 +1,9 @@
 from pydantic import BaseModel
-from typing import Optional, List, Any
+from typing import Optional, List, Any, Dict
 from datetime import date
 from app import models, schemas
 from enum import Enum
+
 
 # ---------- MODULES ----------
 class ModuleBase(BaseModel):
@@ -25,9 +26,56 @@ class Module(ModuleBase):
 
 class ProfessorBase(BaseModel):
     name: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    bio: Optional[str] = None
+    specialties: Optional[str] = None
+    is_active: Optional[bool] = True
 
 class ProfessorCreate(ProfessorBase):
-    course_names: list[str]  # nombres de cursos
+    course_names: list[str] = []
+
+class ProfessorUpdate(BaseModel):
+    name: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    bio: Optional[str] = None
+    specialties: Optional[str] = None
+    is_active: Optional[bool] = None
+    course_names: Optional[list[str]] = None
+
+class ProfessorDetailRead(ProfessorBase):
+    id: int
+    created_at: Optional[date]
+    courses: List[dict] = []  # Will contain course details
+    modules: List[dict] = []  # Will contain module details
+    total_hours: int = 0
+    syllabus_stats: dict = {}  # Stats about syllabus completion
+
+    class Config:
+        from_attributes = True
+
+class ProfessorRead(BaseModel):
+    id: int
+    name: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    courses: list[str] = []
+    is_active: bool = True
+
+    @property
+    def display_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.name
+
+    class Config:
+        from_attributes = True
 
 class ProfessorRead(ProfessorBase):
     id: int

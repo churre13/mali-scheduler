@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from app import models, schemas
 from app.database import get_db
-from typing import List
+from typing import List, Optional
 from sqlalchemy import text
+from dateutil.relativedelta import relativedelta
 
 
 router = APIRouter(prefix="/professors", tags=["professors"])
@@ -270,3 +271,142 @@ def get_available_courses(db: Session = Depends(get_db)):
     """Get all available courses for assignment"""
     courses = db.query(models.Course).all()
     return [{"id": course.id, "name": course.name} for course in courses]
+
+@router.get("/{professor_id}/details", response_model=schemas.ProfessorDetailRead)
+def get_professor_details(professor_id: int, db: Session = Depends(get_db)):
+    """Get detailed information about a professor"""
+    professor = db.query(models.Professor).filter(models.Professor.id == professor_id).first()
+    if not professor:
+        raise HTTPException(status_code=404, detail="Professor not found")
+    
+    # Get courses with dates
+    courses_data = []
+    for course in professor.courses:
+        courses_data.append({
+            "id": course.id,
+            "name": course.name,
+            "start_date": course.start_date,
+            "end_date": course.start_date + relativedelta(months=course.duration_months) if course.start_date else None,
+            "duration_months": course.duration_months,
+            "schedule": course.schedule,
+            "category": course.category,
+            "is_active": course.is_active
+        })
+
+    modules = db.query(models.Module).filter(models.Module.professor_id == professor_id).all()
+    modules_data = []
+    total_hours = 0
+    syllabus_stats = {"hay_documento": 0, "no_hay_documento": 0, "pendiente": 0}
+    
+    for module in modules:
+        course = db.query(models.Course).filter(models.Course.id == module.course_id).first()
+        module_hours = module.hours or 2
+        total_hours += module_hours
+        
+        # Count syllabus status
+        if module.syllabus_status == "hay documento":
+            syllabus_stats["hay_documento"] += 1
+        elif module.syllabus_status == "no hay documento":
+            syllabus_stats["no_hay_documento"] += 1
+        else:
+            syllabus_stats["pendiente"] += 1
+        
+        modules_data.append({
+            "id": module.id,
+            "name": module.name,
+            "order": module.order,
+            "course_name": course.name if course else "Unknown",
+            "course_id": module.course_id,
+            "hours": module_hours,
+            "syllabus_status": module.syllabus_status,
+            "observations": module.observations
+        })
+    
+    return {
+        "id": professor.id,
+        "name": professor.name,
+        "first_name": professor.first_name,
+        "last_name": professor.last_name,
+        "email": professor.email,
+        "phone": professor.phone,
+        "bio": professor.bio,
+        "specialties": professor.specialties,
+        "is_active": professor.is_active,
+        "created_at": professor.created_at,
+        "courses": courses_data,
+        "modules": modules_data,
+        "total_hours": total_hours,
+        "syllabus_stats": syllabus_stats
+    }
+
+@router.put("/{professor_id}/details", response_model=schemas.ProfessorDetailRead)
+def update_professor_details(
+    professor_id: int, 
+    professor_update: schemas.ProfessorUpdate, 
+    db: Session = Depends(get_db)
+):
+    """Update professor details"""
+    professor = db.query(models.Professor).filter(models.Professor.id == professor_id).first()
+    if not professor:
+        raise HTTPException(status_code=404, detail="Professor not found")
+    
+    # Check for email uniqueness if email is being updated
+    update_data = professor_update.dict(exclude_unset=True)
+    if "email" in update_data and update_data["email"]:
+        existing_email = db.query(models.Professor).filter(
+            models.Professor.email == update_data["email"],
+            models.Professor.id != professor_id
+        ).first()
+        if existing_email:
+            raise HTTPException(status_code=400, detail="Email already exists")
+    
+    # Handle course assignments
+    course_names = update_data.pop("course_names", None)
+    
+    # Update basic fields
+    for key, value in update_data.items():
+        setattr(professor, key, value)
+    
+    # Update course assignments if provided
+    if course_names is not None:
+        professor.courses.clear()
+        for course_name in course_names:
+            course = db.query(models.Course).filter(models.Course.name == course_name).first()
+            if course:
+                professor.courses.append(course)
+    
+    db.commit()
+    db.refresh(professor)
+    
+    # Return updated details using the details endpoint
+    return get_professor_details(professor_id, db)
+
+@router.put("/{professor_id}/module/{module_id}/syllabus-status")
+def update_module_syllabus_status(
+    professor_id: int,
+    module_id: int,
+    status: str,
+    observations: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    """Update syllabus status for a specific module"""
+    # Verify professor exists and is assigned to this module
+    module = db.query(models.Module).filter(
+        models.Module.id == module_id,
+        models.Module.professor_id == professor_id
+    ).first()
+    
+    if not module:
+        raise HTTPException(status_code=404, detail="Module not found or not assigned to this professor")
+    
+    valid_statuses = ["hay documento", "no hay documento", "pendiente"]
+    if status not in valid_statuses:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {valid_statuses}")
+    
+    module.syllabus_status = status
+    if observations is not None:
+        module.observations = observations
+    
+    db.commit()
+    
+    return {"message": "Syllabus status updated successfully", "module_name": module.name, "new_status": status}
