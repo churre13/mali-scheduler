@@ -7,6 +7,10 @@
 /* FullCalendar Custom Styles */
 
 /* Event styling */
+.max-w-7xl {
+  max-width:100rem;
+}
+
 .fc-event {
   margin-bottom: 1px !important;
   font-size: 10px !important;

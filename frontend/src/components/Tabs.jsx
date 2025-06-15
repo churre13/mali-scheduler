@@ -2,6 +2,7 @@ import { useState } from "react";
 import CourseScheduleTable from "./CourseScheduleTable";
 import CourseForm from "./CourseForm";
 import Calendar from "./Calendar";
+import ProfessorManagement from "./ProfessorManagement"; // Agregar este import
 
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState("table");
@@ -20,6 +21,7 @@ export default function Tabs() {
   const tabs = [
     { id: "table", label: "Ver calendario", icon: "📋" },
     { id: "calendar", label: "Vista calendario", icon: "📅" },
+    { id: "professors", label: "Gestionar Profesores", icon: "👨‍🏫" }, // Agregar esta línea
     { id: "form", label: "Crear curso", icon: "➕" }
   ];
 
@@ -54,6 +56,10 @@ export default function Tabs() {
         
         {activeTab === "calendar" && (
           <Calendar />
+        )}
+
+        {activeTab === "professors" && (
+          <ProfessorManagement />
         )}
         
         {activeTab === "form" && (

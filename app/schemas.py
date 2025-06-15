@@ -142,3 +142,56 @@ class AcademicModuleView(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ProfessorScheduleItem(BaseModel):
+    session_id: int
+    session_number: int
+    date: date
+    status: SessionStatusEnum
+    extra_note: Optional[str]
+    hours: Optional[int]
+    course_name: str
+    module_name: str
+    course_id: int
+    module_id: int
+
+    class Config:
+        from_attributes = True
+
+class CourseUpdateWithProfessors(BaseModel):
+    name: Optional[str]
+    duration_months: Optional[int]
+    start_date: Optional[date]
+    schedule: Optional[str]
+    category: Optional[str]
+    professor_ids: Optional[List[int]] = []
+    
+    class Config:
+        from_attributes = True
+
+class ModuleWithProfessor(BaseModel):
+    id: int
+    name: str
+    order: Optional[int]
+    professor: Optional[dict[str, Any]]  # {"id": 1, "name": "Professor Name"}
+    syllabus_status: Optional[str]
+    observations: Optional[str]
+    hours: Optional[int]
+    
+    class Config:
+        from_attributes = True
+
+class CourseModulesResponse(BaseModel):
+    course_id: int
+    course_name: str
+    modules: List[ModuleWithProfessor]
+
+class ProfessorModulesResponse(BaseModel):
+    professor_id: int
+    professor_name: str
+    modules: List[dict[str, Any]]
+    total_modules: int
+
+class ModuleAssignment(BaseModel):
+    module_id: int
+    professor_id: Optional[int]  # None to unassign
